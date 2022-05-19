@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
 
 
 
+    public SpriteRenderer redcardestroy;
+
+
+
 
     //public int maxbar = 100;
 
@@ -70,6 +74,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+
+        
         //rb.transform.position = new Vector3(0, 0, 0);
         //ocupants = 0;
         //maxocupants = 30;
@@ -231,10 +238,17 @@ public class PlayerController : MonoBehaviour
         void OnTriggerEnter2D(Collider2D other) // Colisió Trigger 
         {
 
-        if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
+        if (other.gameObject.CompareTag("redcar")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
+
+            //GameOverFuntion(); // Game Over
+
+
+
+            SpriteRenderer redcarsprite = other.gameObject.GetComponent<SpriteRenderer>();
             
-            GameOverFuntion(); // Game Over
+            redcarsprite.sprite = redcardestroy.sprite;
+
         }
       
         else if (other.gameObject.CompareTag("OilSpeed")) // Si l'objecte amb el qual colisionem te un tag == "";
@@ -244,6 +258,12 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             
     
+        }
+        else if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
+        {
+            GameOverFuntion();
+
+
         }
         else if (other.gameObject.CompareTag("coin")) // Si l'objecte amb el qual colisionem te un tag == "";
         {

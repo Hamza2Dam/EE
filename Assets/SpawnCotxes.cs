@@ -15,6 +15,9 @@ public class SpawnCotxes : MonoBehaviour
 
 
 
+
+
+
     private Vector3 StartPosition; // Poscio incial
 
 
@@ -24,7 +27,9 @@ public class SpawnCotxes : MonoBehaviour
 
     void Start()
     {
-      
+ 
+
+        
     }
 
     void Update()
