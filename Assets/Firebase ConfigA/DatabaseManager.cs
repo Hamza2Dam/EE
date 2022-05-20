@@ -40,16 +40,16 @@ public class DatabaseManager : MonoBehaviour
 
     }
 
-    public void SearchUserExist( string id)
+    public void SearchUserExist( )
     {
-        userID = id;
+        //userID = id;
        
     
         StartCoroutine(GetUser((string name) =>
         {
             // si existeix el compte
 
-            if (id == name.ToString()) // 
+            if (userID == name.ToString()) // 
             {
                 NameText.text = "Exist " + name;
 

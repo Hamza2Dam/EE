@@ -107,7 +107,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
 
             dbmng.userID = UID;
-            dbmng.SearchUserExist(UID);
+            dbmng.SearchUserExist();
                 
                   
         }
