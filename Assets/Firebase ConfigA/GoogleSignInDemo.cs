@@ -102,13 +102,7 @@ public class GoogleSignInDemo : MonoBehaviour
             Email = task.Result.Email; // Email
             UID = task.Result.IdToken; // user ID
 
-
             // Enviem les dades a una funció de autentificació
-
-
-            dbmng.userID = UID;
-            dbmng.SearchUserExist();
-                
                   
         }
 

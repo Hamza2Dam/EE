@@ -20,13 +20,13 @@ public class DatabaseManager : MonoBehaviour
     int DistanceDataBase = 0;
     int DistanceInGame = 0;
 
-    public string userID = "e";
+    public string userID;
     private DatabaseReference dbReference;
 
     public TimerScript timerscript;
 
     private string UserGoogleEmail = "hamza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
-    //private string UserGoogleUID = "33352rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
+    private string UserGoogleUID = "333524444rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
 
     void Start()
     {    
@@ -34,17 +34,12 @@ public class DatabaseManager : MonoBehaviour
         //userID = SystemInfo.deviceUniqueIdentifier;       
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-
-        Debug.Log("Start");
-  
+        userID = UserGoogleUID;
 
     }
 
-    public void SearchUserExist( )
-    {
-        //userID = id;
-       
-    
+    public void SearchUserExist()
+    {    
         StartCoroutine(GetUser((string name) =>
         {
             // si existeix el compte
@@ -58,7 +53,7 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 NameText.text = "No Exist " + name;
-                CreateUser();
+                //CreateUser();
             }
 
         }));
@@ -67,6 +62,7 @@ public class DatabaseManager : MonoBehaviour
     // Crear Usuari nomes un cop i si userid no existeix falta funcinalitat
     public void CreateUser()
     {
+        SearchUserExist();
         User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
         string json = JsonUtility.ToJson(newUser);
 
