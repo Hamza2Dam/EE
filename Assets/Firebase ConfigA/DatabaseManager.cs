@@ -42,7 +42,6 @@ public class DatabaseManager : MonoBehaviour
 
     public void SearchUserExist( string id)
     {
-
         userID = id;
     
         StartCoroutine(GetUser((string name) =>
@@ -58,16 +57,15 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 NameText.text = "No Exist " + name;
-                CreateUser(id);
+                CreateUser();
             }
 
         }));
     }
 
     // Crear Usuari nomes un cop i si userid no existeix falta funcinalitat
-    public void CreateUser(string id)
+    public void CreateUser()
     {
-        userID = id;
         User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
         string json = JsonUtility.ToJson(newUser);
 

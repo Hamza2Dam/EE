@@ -19,7 +19,6 @@ public class GoogleSignInDemo : MonoBehaviour
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
 
-
     public DatabaseManager dbmng;
 
     private void Awake()
