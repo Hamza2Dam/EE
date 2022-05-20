@@ -24,9 +24,10 @@ public class DatabaseManager : MonoBehaviour
     private DatabaseReference dbReference;
 
     public TimerScript timerscript;
+    public GoogleSignInDemo dmg;
 
     private string UserGoogleEmail = "hamza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
-    private string UserGoogleUID = "333524444rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
+    //private string UserGoogleUID = "1333524444rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
 
     void Start()
     {    
@@ -34,8 +35,12 @@ public class DatabaseManager : MonoBehaviour
         //userID = SystemInfo.deviceUniqueIdentifier;       
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-        userID = UserGoogleUID;
 
+    }
+
+    void update()
+    {
+        userID = dmg.Email;
     }
 
     public void SearchUserExist()
@@ -53,7 +58,6 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 NameText.text = "No Exist " + name;
-                //CreateUser();
             }
 
         }));
@@ -62,7 +66,6 @@ public class DatabaseManager : MonoBehaviour
     // Crear Usuari nomes un cop i si userid no existeix falta funcinalitat
     public void CreateUser()
     {
-        SearchUserExist();
         User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
         string json = JsonUtility.ToJson(newUser);
 
@@ -111,9 +114,6 @@ public class DatabaseManager : MonoBehaviour
             onCallback.Invoke(int.Parse(snapshot.Value.ToString()));
         }
     }
-
-
-  
 
 
 
