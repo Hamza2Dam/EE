@@ -20,7 +20,7 @@ public class DatabaseManager : MonoBehaviour
     int DistanceDataBase = 0;
     int DistanceInGame = 0;
 
-    private string userID;
+    private string userID = "e";
     private DatabaseReference dbReference;
 
     public TimerScript timerscript;
@@ -31,9 +31,7 @@ public class DatabaseManager : MonoBehaviour
     void Start()
     {    
         FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
-        //userID = SystemInfo.deviceUniqueIdentifier;
-
-        
+        //userID = SystemInfo.deviceUniqueIdentifier;       
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
@@ -60,15 +58,16 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 NameText.text = "No Exist " + name;
-                CreateUser();
+                CreateUser(id);
             }
 
         }));
     }
 
     // Crear Usuari nomes un cop i si userid no existeix falta funcinalitat
-    public void CreateUser()
+    public void CreateUser(string id)
     {
+        userID = id;
         User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
         string json = JsonUtility.ToJson(newUser);
 

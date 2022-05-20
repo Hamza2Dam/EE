@@ -13,8 +13,8 @@ public class GoogleSignInDemo : MonoBehaviour
     public Text infoText;
     private string webClientId = "352196159774-d52l815eaqiqvan43po01fe6tj4h9tfu.apps.googleusercontent.com";
 
-    public string Email;
-    public string UID;
+    private string Email;
+    private string UID;
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
@@ -107,20 +107,13 @@ public class GoogleSignInDemo : MonoBehaviour
             // Enviem les dades a una funció de autentificació
 
             dbmng.SearchUserExist(UID);
-           
-
-
-
-
-
-        
-
-
-            
-
-            
+                
+                  
         }
+
     }
+
+
 
     private void SignInWithGoogleOnFirebase(string idToken)
     {
