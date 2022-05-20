@@ -105,6 +105,8 @@ public class GoogleSignInDemo : MonoBehaviour
 
             // Enviem les dades a una funció de autentificació
 
+
+            dbmng.userID = UID;
             dbmng.SearchUserExist(UID);
                 
                   

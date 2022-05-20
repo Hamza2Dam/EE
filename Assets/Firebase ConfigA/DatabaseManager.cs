@@ -20,7 +20,7 @@ public class DatabaseManager : MonoBehaviour
     int DistanceDataBase = 0;
     int DistanceInGame = 0;
 
-    private string userID = "e";
+    public string userID = "e";
     private DatabaseReference dbReference;
 
     public TimerScript timerscript;
@@ -43,6 +43,7 @@ public class DatabaseManager : MonoBehaviour
     public void SearchUserExist( string id)
     {
         userID = id;
+       
     
         StartCoroutine(GetUser((string name) =>
         {
