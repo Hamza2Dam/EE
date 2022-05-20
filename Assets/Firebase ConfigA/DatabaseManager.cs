@@ -25,37 +25,41 @@ public class DatabaseManager : MonoBehaviour
 
     public TimerScript timerscript;
 
-    private string UserGoogleEmail = "kkkMhallmza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
-    private string UserGoogleUID = "352151231254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
+    private string UserGoogleEmail = "hamza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
+    //private string UserGoogleUID = "33352rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
 
     void Start()
     {    
         FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
         //userID = SystemInfo.deviceUniqueIdentifier;
-        userID = UserGoogleUID;
+
+        
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
         Debug.Log("Start");
-        SearchUserExist();
+  
 
     }
 
-    public void SearchUserExist()
+    public void SearchUserExist( string id)
     {
-        StartCoroutine(GetUser((string nameDB) =>
-        {
-            // si existeix el correu electronic 
 
-            if (UserGoogleUID == nameDB.ToString())
+        userID = id;
+    
+        StartCoroutine(GetUser((string name) =>
+        {
+            // si existeix el compte
+
+            if (id == name.ToString()) // 
             {
-                NameText.text = "Exist " + nameDB;
+                NameText.text = "Exist " + name;
 
             }
-            // si no existeic, crear usuari nou
+            // si no existeix, crear usuari nou
             else
             {
-                NameText.text = "No Exist " + nameDB;
+                NameText.text = "No Exist " + name;
                 CreateUser();
             }
 
@@ -113,6 +117,9 @@ public class DatabaseManager : MonoBehaviour
             onCallback.Invoke(int.Parse(snapshot.Value.ToString()));
         }
     }
+
+
+  
 
 
 
