@@ -5,6 +5,8 @@ using Firebase;
 using Firebase.Database;
 using UnityEngine.UI;
 using System;
+using Google;
+using Firebase.Auth;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -27,20 +29,17 @@ public class DatabaseManager : MonoBehaviour
     public GoogleSignInDemo dmg;
 
     private string UserGoogleEmail = "hamza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
-    //private string UserGoogleUID = "1333524444rne1512eh31254ewr";  // ID DE GOOGLE FALTA CONFIGURAR
+    private string UserGoogleUID = "123456789";  // ID DE GOOGLE FALTA CONFIGURAR
 
     void Start()
     {    
         FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
-        //userID = SystemInfo.deviceUniqueIdentifier;       
+        //userID = SystemInfo.deviceUniqueIdentifier;
+        
+        userID = UserGoogleUID;
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-    }
-
-    void update()
-    {
-        userID = dmg.Email;
     }
 
     public void SearchUserExist()
@@ -48,30 +47,38 @@ public class DatabaseManager : MonoBehaviour
         StartCoroutine(GetUser((string name) =>
         {
             // si existeix el compte
+            String ida = name.ToString();
 
-            if (userID == name.ToString()) // 
+            if (userID == ida) // 
             {
-                NameText.text = "Exist " + name;
+                NameText.text = "Exist " + ida;
 
             }
             // si no existeix, crear usuari nou
             else
             {
-                NameText.text = "No Exist " + name;
+                NameText.text = "No Exist " + ida;
             }
 
         }));
     }
 
-    // Crear Usuari nomes un cop i si userid no existeix falta funcinalitat
+    // Crear Usuari nomes un cop i si userid no existeix || falta funcionalitat
     public void CreateUser()
     {
         User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
         string json = JsonUtility.ToJson(newUser);
 
         dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
+
+        GoogleSignInUser db = new GoogleSignInUser();
+
+        string dbdisp = db.DisplayName;
+        NameText.text = "db.DisplayName " + dbdisp;
     }
 
+
+    // GET USER
     public IEnumerator GetUser(Action<string> onCallback)
     {
         var userNameData = dbReference.Child("users").Child(userID).Child("UID_Google").GetValueAsync();
@@ -87,6 +94,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
+    // GET PUNTUACIO
     public IEnumerator GetDistance(Action<int> onCallback)
     {
         var userDistanceData = dbReference.Child("users").Child(userID).Child("distancia").GetValueAsync();
@@ -101,6 +109,8 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+
+    // GET GOLD
     public IEnumerator GetGold(Action<int> onCallback)
     {
         var userCoinData = dbReference.Child("users").Child(userID).Child("coins").GetValueAsync();

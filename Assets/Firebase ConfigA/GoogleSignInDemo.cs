@@ -13,8 +13,9 @@ public class GoogleSignInDemo : MonoBehaviour
     public Text infoText;
     private string webClientId = "352196159774-d52l815eaqiqvan43po01fe6tj4h9tfu.apps.googleusercontent.com";
 
-    public string Email = "qergqegyhqerluighqieur";
-    public string UID;
+    private string Name;
+    private string Email;
+    private string UID;
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
@@ -85,23 +86,24 @@ public class GoogleSignInDemo : MonoBehaviour
                 }
             }
         }
+
         else if (task.IsCanceled)
         {
             AddToInformation("Canceled");
         }
+
         else
         {
-            AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            AddToInformation("Email = " + task.Result.Email);
-            AddToInformation("Google ID Token = " + task.Result.IdToken);
-            AddToInformation("Email = " + task.Result.Email);
+            Name = task.Result.DisplayName;
+            Email = task.Result.Email;
+            UID = task.Result.IdToken; 
+
+            AddToInformation("Welcome: " + Name);
+            AddToInformation("Email = " + Email);
+            AddToInformation("Google ID Token = " + UID);
+            AddToInformation("Email = " + Email);
+
             SignInWithGoogleOnFirebase(task.Result.IdToken);
-
-
-            //Email = task.Result.Email; // Email
-            UID = task.Result.IdToken; // user ID
-
-            // Enviem les dades a una funció de autentificació
                   
         }
 
