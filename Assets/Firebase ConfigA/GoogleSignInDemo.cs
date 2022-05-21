@@ -13,9 +13,9 @@ public class GoogleSignInDemo : MonoBehaviour
     public Text infoText;
     private string webClientId = "352196159774-d52l815eaqiqvan43po01fe6tj4h9tfu.apps.googleusercontent.com";
 
-    private string Name;
-    private string Email;
-    private string UID;
+    public string Name;
+    public string Email;
+    public string UID;
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
@@ -101,14 +101,17 @@ public class GoogleSignInDemo : MonoBehaviour
             AddToInformation("Welcome: " + Name);
             AddToInformation("Email = " + Email);
             AddToInformation("Google ID Token = " + UID);
-            AddToInformation("Email = " + Email);
 
             SignInWithGoogleOnFirebase(task.Result.IdToken);
                   
         }
 
     }
+    private void AddToInformation(string str)
+    {
 
+        infoText.text += "\n" + str;
+    }
 
 
     private void SignInWithGoogleOnFirebase(string idToken)
@@ -151,5 +154,4 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
-    private void AddToInformation(string str) { infoText.text += "\n" + str; }
 }
