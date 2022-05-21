@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class another : MonoBehaviour
 {
 
-    public GoogleSignInDemo gsd;
-    public Text sd;
+    public GoogleSignInDemo googleScript;
+    public Text AnotherText;
 
     private string X;
     private string Y;
@@ -14,11 +14,11 @@ public class another : MonoBehaviour
 
     void Update()
     {
-        X = gsd.Email;
-        Y = gsd.Name;
-        Z = gsd.UID;
+        X = googleScript.Email;
+        Y = googleScript.Name;
+        Z = googleScript.UID;
 
-        sd.text = X + " / " + Y + " / " + Z;
+        AnotherText.text = X + " / " + Y + " / " + Z;
     }
 
 }

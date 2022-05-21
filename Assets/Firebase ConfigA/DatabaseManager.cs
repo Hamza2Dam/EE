@@ -12,9 +12,10 @@ public class DatabaseManager : MonoBehaviour
 {
     public Text Distancia;
     public Text Coins;
-
     public Text HightScore;
     public Text NameText;
+
+    public Text AnotherText;
 
     int CoinsDataBase = 0;
     int CoinsInGame = 0;
@@ -22,21 +23,39 @@ public class DatabaseManager : MonoBehaviour
     int DistanceDataBase = 0;
     int DistanceInGame = 0;
 
-    public string userID;
+    private string userID;
     private DatabaseReference dbReference;
 
-    public TimerScript timerscript;
-    public GoogleSignInDemo dmg;
+    public TimerScript timerScript;
+    public GoogleSignInDemo googleScript;
 
-    private string UserGoogleEmail = "hamza@gmagil.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
+    private string UserGoogleEmail = "hamza@gmail.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
     private string UserGoogleUID = "123456789";  // ID DE GOOGLE FALTA CONFIGURAR
+
+
+    // Varaibles para recibit datos del usuario cuando inicia sesion de google
+    private string UserName;
+    private string UserEmail;
+    private string UserUID;
+
+    void Update()
+    {
+        UserName = googleScript.Email;
+        UserEmail = googleScript.Name;
+        UserUID = googleScript.UID;
+
+        AnotherText.text = UserName + " // " + UserEmail + " // " + UserUID;
+    }
+
 
     void Start()
     {    
         FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
-        //userID = SystemInfo.deviceUniqueIdentifier;
-        
+
+        //userID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
+
         userID = UserGoogleUID;
+        //userID = UserName;
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
@@ -71,10 +90,6 @@ public class DatabaseManager : MonoBehaviour
 
         dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
 
-        GoogleSignInUser db = new GoogleSignInUser();
-
-        string dbdisp = db.DisplayName;
-        NameText.text = "db.DisplayName " + dbdisp;
     }
 
 
@@ -148,7 +163,7 @@ public class DatabaseManager : MonoBehaviour
             DistanceDataBase = distancia;
 
             // la puntuacio que anem fent durant la partida que agafem del script TimeScript
-            DistanceInGame = timerscript.dbTimeCompare;
+            DistanceInGame = timerScript.dbTimeCompare;
 
 
             if (DistanceDataBase < DistanceInGame)
