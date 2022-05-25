@@ -56,17 +56,17 @@ public class SpawnCotxes : MonoBehaviour
         if (randomNumber == 1)  // Si el numero random == 1 spawneja l'objecte al carril1.
         {
 
-            generate.transform.position = new Vector3(carril1.transform.position.x, 40, 0); // Igualem la posicio x del objecte amb la del carril corresponent.
+            generate.transform.position = new Vector3(carril1.transform.position.x, 39, 0); // Igualem la posicio x del objecte amb la del carril corresponent.
         }
         else if (randomNumber == 2)
         {
-            generate.transform.position = new Vector3(carril2.transform.position.x, 40, 0);
+            generate.transform.position = new Vector3(carril2.transform.position.x, 39, 0);
 
         }
 
         else if (randomNumber == 3)
         {
-            generate.transform.position = new Vector3(carril3.transform.position.x, 40, 0);
+            generate.transform.position = new Vector3(carril3.transform.position.x, 39, 0);
 
         }
         else if (randomNumber == 4) // 2 cotxes
@@ -77,29 +77,29 @@ public class SpawnCotxes : MonoBehaviour
             if(randomNumber2 == 1) 
             {
 
-                generate.transform.position = new Vector3(carril1.transform.position.x, 40, 0);
+                generate.transform.position = new Vector3(carril1.transform.position.x, 39, 0);
              
                 GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
 
-                generate2.transform.position = new Vector3(carril2.transform.position.x, 40, 0);
+                generate2.transform.position = new Vector3(carril2.transform.position.x, 39, 0);
 
             }
             else if (randomNumber2 == 2)
             {
-                generate.transform.position = new Vector3(carril1.transform.position.x, 40, 0);
+                generate.transform.position = new Vector3(carril1.transform.position.x, 39, 0);
 
                 GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
 
-                generate2.transform.position = new Vector3(carril3.transform.position.x, 40, 0);
+                generate2.transform.position = new Vector3(carril3.transform.position.x, 39, 0);
 
             }
             else if (randomNumber2 == 3)
             {
-                generate.transform.position = new Vector3(carril2.transform.position.x, 40, 0);
+                generate.transform.position = new Vector3(carril2.transform.position.x, 39, 0);
 
                 GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
 
-                generate2.transform.position = new Vector3(carril3.transform.position.x, 40, 0);
+                generate2.transform.position = new Vector3(carril3.transform.position.x, 39, 0);
 
             }
 
