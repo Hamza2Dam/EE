@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
         void OnTriggerEnter2D(Collider2D other) // Colisió Trigger 
         {
 
-        if (other.gameObject.CompareTag("redcar")) // Si l'objecte amb el qual colisionem te un tag == "";
+        if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
 
             GameOverFuntion(); // Game Over
@@ -237,12 +237,7 @@ public class PlayerController : MonoBehaviour
 
 
         }
-        else if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
-        {
-            GameOverFuntion();
-
-          
-        }
+        
         else if (other.gameObject.CompareTag("coin")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
 
