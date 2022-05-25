@@ -6,89 +6,65 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
-    Rigidbody2D rb; // Rigidbody de l'objecte
-    public Transform carril1; // Posicio del carril1 on agafarem la x
-    public Transform carril2;
-    public Transform carril3;
-    public GameObject redcar;
-    public GameObject GameOverObject;
-    public GameObject SpawnCotxes;
-    public GameObject SpawnMonedes;
-    public GameObject timer;
-
+    // Rigidbody de l'objecte : 
+    Rigidbody2D rb;
+    
+    
+    // GameManager : 
     public GameManager gm;
 
-    //public AudioSource coinssound;
-    //public AudioSource gameoversound;
-    //public AudioSource gasoilsound;
-    //public AudioSource sonidojuego;
+    // Carrils : 
 
-    public GasolinaBar gasolinascript;
-    public GameOver gameOverscript;
+    public Transform carril1;
+    public Transform carril2;
+    public Transform carril3;
+
+
+    // DataBase : 
     public DatabaseManager dbscript;
 
 
 
-    public SpriteRenderer redcardestroy;
-
-
-
-
-    //public int maxbar = 100;
-
-
+   
 
 
     private int contadorcoins;
     private bool stopGame;
 
+   
+
+    // Swap : 
+    private float swipeRange = 50;
+    private float tapRange = 10;
     private Vector2 startTouchPosition;
     private Vector2 currentPosition;
     private Vector2 endTouchPosition;
     private bool stopTouch = false;
 
-    public float swipeRange;
-    public float tapRange;
+
 
     public  Text coins;
     public Text finalcoins;
 
    public ScrollCarreteras speed;
-    
-    
-    
 
 
 
 
-
-
-
-    // public int ocupants;
-    // public int maxocupants;
-
-
-    //ScrollCarreteras scrollspeed;
 
 
     // Start is called before the first frame update
-    void Start()
+     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
 
-        
-        //rb.transform.position = new Vector3(0, 0, 0);
-        //ocupants = 0;
-        //maxocupants = 30;
-
-        // speed = GetComponent<ScrollCarreteras>();
 
         rb.transform.position = new Vector3(carril2.transform.position.x, carril2.transform.position.y, 0);
         contadorcoins = 0;
         stopGame = false;
         Time.timeScale = 1;
+
+        
 
 
     }
@@ -247,9 +223,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-            SpriteRenderer redcarsprite = other.gameObject.GetComponent<SpriteRenderer>();
-            
-            redcarsprite.sprite = redcardestroy.sprite;
+           
 
         }
       
@@ -257,7 +231,7 @@ public class PlayerController : MonoBehaviour
         {
       
             gm.gasoilsound.Play(); // Gasoil SoundEffect
-            gasolinascript.Sumargasolina();
+            gm.gasolinascript.Sumargasolina();
             Destroy(other.gameObject);
             
     
@@ -306,7 +280,7 @@ public class PlayerController : MonoBehaviour
 
        // sonidojuego.Stop();
 
-        GameOverObject.SetActive(true); // Activem el canvas de GameOver
+        gm.GameOverObject.SetActive(true); // Activem el canvas de GameOver
 
         finalcoins.text = contadorcoins.ToString() ;
 
@@ -320,8 +294,8 @@ public class PlayerController : MonoBehaviour
         stopGame = true;
 
         //speed.scrollspeed = 0; // Parem el scrolling 
-        Destroy(SpawnCotxes); // Parar Cotxes
-        Destroy(SpawnMonedes);
+        Destroy(gm.SpawnCotxes); // Parar Cotxes
+        Destroy(gm.SpawnMonedes);
         //timer.SetActive(false); // Parem el timer
 
     }

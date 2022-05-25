@@ -20,6 +20,6 @@ public class NpcController : MonoBehaviour
     void Update()
     {
         transform.Translate(translation: Vector3.left * speed * Time.deltaTime); // Moviment lateral de l'objecte
-        transform.Translate(translation: Vector3.down * (speed  - 1) * Time.deltaTime); // Scroll del obejcte cap avall amb un speed
+        transform.Translate(translation: Vector3.down * (speed + 2) * Time.deltaTime); // Scroll del obejcte cap avall amb un speed
     }
 }

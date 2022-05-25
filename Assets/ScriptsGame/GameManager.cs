@@ -15,6 +15,19 @@ public class GameManager : MonoBehaviour
     public AudioSource sonidojuego;
 
 
+    // Barra de Gasolina : 
+    public GasolinaBar gasolinascript;
+
+
+    // GameObjects :
+
+
+    public GameObject GameOverObject;
+    public GameObject SpawnCotxes;
+    public GameObject SpawnMonedes;
+    public GameObject timer;
+
+
 
     // Start is called before the first frame update
     void Start()

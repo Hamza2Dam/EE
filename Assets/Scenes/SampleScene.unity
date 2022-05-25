@@ -2448,21 +2448,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833416035b9a0114fb95520e68c8c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 2002637294}
   carril1: {fileID: 98773969}
   carril2: {fileID: 2040562976}
   carril3: {fileID: 1342392751}
-  redcar: {fileID: 2247370479580660169, guid: d6dd73cf739c35b43942849e243df103, type: 3}
-  GameOverObject: {fileID: 739635270}
-  SpawnCotxes: {fileID: 728086230}
-  SpawnMonedes: {fileID: 1137265107}
-  timer: {fileID: 15025169}
-  gm: {fileID: 2002637294}
-  gasolinascript: {fileID: 1505147191}
-  gameOverscript: {fileID: 2014044734}
   dbscript: {fileID: 2114233655}
-  redcardestroy: {fileID: 530252379752131777, guid: f93670c8105ba674281d167f44714413, type: 3}
-  swipeRange: 50
-  tapRange: 10
   coins: {fileID: 1067684814}
   finalcoins: {fileID: 456244117}
   speed: {fileID: 1215122750}
@@ -29765,6 +29755,11 @@ MonoBehaviour:
   gameoversound: {fileID: 1749369157}
   gasoilsound: {fileID: 1223951186}
   sonidojuego: {fileID: 942326731}
+  gasolinascript: {fileID: 1505147191}
+  GameOverObject: {fileID: 739635270}
+  SpawnCotxes: {fileID: 728086230}
+  SpawnMonedes: {fileID: 1137265107}
+  timer: {fileID: 15025169}
 --- !u!4 &2002637295
 Transform:
   m_ObjectHideFlags: 0
