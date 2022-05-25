@@ -12,12 +12,6 @@ public class SpawnCotxes : MonoBehaviour
     public GameObject[] car;
 
 
-
-
-
-
-
-
     private Vector3 StartPosition; // Poscio incial
 
 
@@ -73,34 +67,44 @@ public class SpawnCotxes : MonoBehaviour
         {
             int randomcar2 = Random.Range(0, 3);
             float randomNumber2 = Random.Range(1, 4); // Número random per escollir els carrils on spawnejar l'objecte de manera random
+            float carrilx;
+            float carrilx2;
             
             if(randomNumber2 == 1) 
             {
+                carrilx = carril1.transform.position.x;
+                carrilx2 = carril2.transform.position.x;
 
-                generate.transform.position = new Vector3(carril1.transform.position.x, 39, 0);
-             
-                GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
+                spawn(carrilx , carrilx2);
+                
 
-                generate2.transform.position = new Vector3(carril2.transform.position.x, 39, 0);
 
             }
             else if (randomNumber2 == 2)
             {
-                generate.transform.position = new Vector3(carril1.transform.position.x, 39, 0);
+                carrilx = carril1.transform.position.x;
+                carrilx2 = carril3.transform.position.x;
 
-                GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
+                spawn(carrilx, carrilx2);
 
-                generate2.transform.position = new Vector3(carril3.transform.position.x, 39, 0);
 
             }
             else if (randomNumber2 == 3)
             {
-                generate.transform.position = new Vector3(carril2.transform.position.x, 39, 0);
+                carrilx = carril2.transform.position.x;
+                carrilx2 = carril3.transform.position.x;
 
+                spawn(carrilx, carrilx2);
+
+
+            }
+
+            void spawn(float carrilx , float carrilx2)
+            {
+                generate.transform.position = new Vector3(carrilx, 39, 0);
                 GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
 
-                generate2.transform.position = new Vector3(carril3.transform.position.x, 39, 0);
-
+                generate2.transform.position = new Vector3(carrilx2, 39, 0);
             }
 
 

@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     public GameObject SpawnMonedes;
     public GameObject timer;
 
-    public AudioSource coinssound;
-    public AudioSource gameoversound;
-    public AudioSource gasoilsound;
-    public AudioSource sonidojuego;
+    public GameManager gm;
+
+    //public AudioSource coinssound;
+    //public AudioSource gameoversound;
+    //public AudioSource gasoilsound;
+    //public AudioSource sonidojuego;
 
     public GasolinaBar gasolinascript;
     public GameOver gameOverscript;
@@ -253,7 +255,7 @@ public class PlayerController : MonoBehaviour
       
         else if (other.gameObject.CompareTag("OilSpeed")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
-            gasoilsound.Play();
+            //gasoilsound.Play();
             gasolinascript.Sumargasolina();
             Destroy(other.gameObject);
             
@@ -269,7 +271,7 @@ public class PlayerController : MonoBehaviour
         {
 
             contadorcoins++; // Sumem la moneda
-            coinssound.Play(); // So de la moneda
+            //coinssound.Play(); // So de la moneda
             coins.text = contadorcoins.ToString(); // Mostrem la suma
             Destroy(other.gameObject); // Destruim la moneda
 
@@ -286,9 +288,9 @@ public class PlayerController : MonoBehaviour
 
         dbscript.UpdateAllData(); // database update data(Coins) and (HighScore)
 
-        gameoversound.Play();
+        //gameoversound.Play();
 
-        sonidojuego.Stop();
+       // sonidojuego.Stop();
 
         GameOverObject.SetActive(true); // Activem el canvas de GameOver
 
