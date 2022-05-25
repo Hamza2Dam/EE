@@ -255,15 +255,27 @@ public class PlayerController : MonoBehaviour
       
         else if (other.gameObject.CompareTag("OilSpeed")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
-            //gasoilsound.Play();
+      
+            gm.gasoilsound.Play(); // Gasoil SoundEffect
             gasolinascript.Sumargasolina();
             Destroy(other.gameObject);
             
     
         }
+        else if (other.gameObject.CompareTag("npc")) // Si l'objecte amb el qual colisionem te un tag == "";
+        {
+
+          
+            Destroy(other.gameObject);
+            GameOverFuntion();
+
+
+        }
         else if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
             GameOverFuntion();
+
+           
 
 
         }
@@ -271,7 +283,8 @@ public class PlayerController : MonoBehaviour
         {
 
             contadorcoins++; // Sumem la moneda
-            //coinssound.Play(); // So de la moneda
+            gm.coinssound.Play();// So de la moneda
+         
             coins.text = contadorcoins.ToString(); // Mostrem la suma
             Destroy(other.gameObject); // Destruim la moneda
 
@@ -288,7 +301,8 @@ public class PlayerController : MonoBehaviour
 
         dbscript.UpdateAllData(); // database update data(Coins) and (HighScore)
 
-        //gameoversound.Play();
+        
+        gm.gameoversound.Play(); // GameOver soundEffect
 
        // sonidojuego.Stop();
 

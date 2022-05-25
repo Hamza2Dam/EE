@@ -2871,7 +2871,7 @@ GameObject:
   - component: {fileID: 827718748}
   m_Layer: 0
   m_Name: Npc1
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2888,7 +2888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1887f096565ed0c41be3d6eadd63c9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
 --- !u!58 &827718749
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2899,7 +2899,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.00933218}
@@ -2983,7 +2983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827718747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.507397, y: 32.000465, z: 310.49155}
+  m_LocalPosition: {x: 1.507397, y: 31.86, z: 310.49155}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -29761,10 +29761,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea54d3d9cf39ba4ca34bb6f51d8a352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinssound: {fileID: 0}
-  gameoversound: {fileID: 0}
-  gasoilsound: {fileID: 0}
-  sonidojuego: {fileID: 0}
+  coinssound: {fileID: 366740497}
+  gameoversound: {fileID: 1749369157}
+  gasoilsound: {fileID: 1223951186}
+  sonidojuego: {fileID: 942326731}
 --- !u!4 &2002637295
 Transform:
   m_ObjectHideFlags: 0

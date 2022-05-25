@@ -11,6 +11,8 @@ TagManager:
   - Bus
   - Destroyer
   - coin
+  - redcar
+  - npc
   layers:
   - Default
   - TransparentFX
