@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour
     public DatabaseManager dbscript;
 
 
-
-   
-
-
     private int contadorcoins;
     private bool stopGame;
 
@@ -46,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public  Text coins;
     public Text finalcoins;
 
-   public ScrollCarreteras speed;
+    public ScrollCarreteras speed;
 
 
 
@@ -56,11 +52,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
      void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); // Rigidbody
 
 
         rb.transform.position = new Vector3(carril2.transform.position.x, carril2.transform.position.y, 0);
-        contadorcoins = 0;
+        contadorcoins = 0; // Iniciem el comptador a 0
         stopGame = false;
         Time.timeScale = 1;
 
@@ -76,8 +72,6 @@ public class PlayerController : MonoBehaviour
         Swipe();
         movementpc();
        
-       
-
     }
 
 
@@ -135,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+
 
 
 
@@ -219,11 +215,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("redcar")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
 
-            //GameOverFuntion(); // Game Over
-
-
-
-           
+            GameOverFuntion(); // Game Over
 
         }
       
@@ -231,7 +223,7 @@ public class PlayerController : MonoBehaviour
         {
       
             gm.gasoilsound.Play(); // Gasoil SoundEffect
-            gm.gasolinascript.Sumargasolina();
+            gm.gasolinascript.Sumargasolina(); // Sumem la gasolina
             Destroy(other.gameObject);
             
     
@@ -249,9 +241,7 @@ public class PlayerController : MonoBehaviour
         {
             GameOverFuntion();
 
-           
-
-
+          
         }
         else if (other.gameObject.CompareTag("coin")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
@@ -278,7 +268,6 @@ public class PlayerController : MonoBehaviour
         
         gm.gameoversound.Play(); // GameOver soundEffect
 
-       // sonidojuego.Stop();
 
         gm.GameOverObject.SetActive(true); // Activem el canvas de GameOver
 
@@ -293,10 +282,10 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0;
         stopGame = true;
 
-        //speed.scrollspeed = 0; // Parem el scrolling 
+    
         Destroy(gm.SpawnCotxes); // Parar Cotxes
         Destroy(gm.SpawnMonedes);
-        //timer.SetActive(false); // Parem el timer
+    
 
     }
 
