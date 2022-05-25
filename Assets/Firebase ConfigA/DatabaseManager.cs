@@ -24,59 +24,38 @@ public class DatabaseManager : MonoBehaviour
     int DistanceInGame = 0;
 
     private string userID;
+    private string UserName = "Hamza";
+
     private DatabaseReference dbReference;
 
     public TimerScript timerScript;
-    public GoogleSignInDemo googleScript;
-
-    private string UserGoogleEmail = "hamza@gmail.com"; // EMAIL DE GOOGLE FALTA CONFIGURAR
-    private string UserGoogleUID = "123456789";  // ID DE GOOGLE FALTA CONFIGURAR
-
-
-    // Varaibles para recibit datos del usuario cuando inicia sesion de google
-    private string UserName;
-    private string UserEmail;
-    private string UserUID;
-
-    void Update()
-    {
-        UserName = googleScript.Email;
-        UserEmail = googleScript.Name;
-        UserUID = googleScript.UID;
-
-        AnotherText.text = UserName + " // " + UserEmail + " // " + UserUID;
-    }
-
 
     void Start()
     {    
         FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
 
-        //userID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
-
-        userID = UserGoogleUID;
-        //userID = UserName;
+        userID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
     }
 
-    public void SearchUserExist()
+    public void SearchIfUserExist()
     {    
         StartCoroutine(GetUser((string name) =>
         {
             // si existeix el compte
-            String ida = name.ToString();
+            String userIDDatabase = name.ToString();
 
-            if (userID == ida) // 
+            if (userID == userIDDatabase) // 
             {
-                NameText.text = "Exist " + ida;
+                NameText.text = "Exist " + userIDDatabase;
 
             }
             // si no existeix, crear usuari nou
             else
             {
-                NameText.text = "No Exist " + ida;
+                NameText.text = "No Exist " + userIDDatabase;
             }
 
         }));
@@ -85,11 +64,10 @@ public class DatabaseManager : MonoBehaviour
     // Crear Usuari nomes un cop i si userid no existeix || falta funcionalitat
     public void CreateUser()
     {
-        User newUser = new User(DistanceInGame, CoinsInGame, UserGoogleEmail, userID);
+        User newUser = new User(DistanceInGame, CoinsInGame, UserName, userID);
         string json = JsonUtility.ToJson(newUser);
 
         dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
-
     }
 
 
@@ -141,11 +119,9 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-
     // Update Database 
     public void UpdateAllData()
     {
-
         CoinsInGame = int.Parse(Coins.text); // Diners en la partida
 
         // GET COINS from DB 

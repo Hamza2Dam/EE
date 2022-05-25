@@ -10,12 +10,11 @@ using UnityEngine.UI;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
-    public Text infoText;
     private string webClientId = "352196159774-d52l815eaqiqvan43po01fe6tj4h9tfu.apps.googleusercontent.com";
 
-    public string Name;
-    public string Email;
-    public string UID;
+    private string Name;
+    private string Email;
+    private string UID;
 
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
@@ -94,7 +93,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
         else
         {
-            Name = task.Result.DisplayName;
+            Name = task.Result.DisplayName; // Nom del usuari connectat amb la conta de google
             Email = task.Result.Email;
             UID = task.Result.IdToken; 
 
@@ -110,7 +109,7 @@ public class GoogleSignInDemo : MonoBehaviour
     private void AddToInformation(string str)
     {
 
-        infoText.text += "\n" + str;
+        //infoText.text += "\n" + str;
     }
 
 
