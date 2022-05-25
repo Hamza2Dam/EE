@@ -15,8 +15,6 @@ public class DatabaseManager : MonoBehaviour
     public Text HightScore;
     public Text NameText;
 
-    public Text AnotherText;
-
     int CoinsDataBase = 0;
     int CoinsInGame = 0;
 
@@ -38,24 +36,28 @@ public class DatabaseManager : MonoBehaviour
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
+        SearchIfUserExist();
+
     }
 
     public void SearchIfUserExist()
     {    
-        StartCoroutine(GetUser((string name) =>
+        StartCoroutine(GetUser((string IdDB) =>
         {
-            // si existeix el compte
-            String userIDDatabase = name.ToString();
+            String userIdDatabase = IdDB.ToString();
 
-            if (userID == userIDDatabase) // 
+            // si existeix el compte
+            if (userID.Equals(userIdDatabase)) // 
             {
-                NameText.text = "Exist " + userIDDatabase;
+                NameText.text = "User Exist " + userIdDatabase;
 
             }
-            // si no existeix, crear usuari nou
+
+            // si no existeix, crear usuari nou amb BD
             else
             {
-                NameText.text = "No Exist " + userIDDatabase;
+                NameText.text = "User No Exist " + userIdDatabase;
+                CreateUser();
             }
 
         }));
@@ -67,30 +69,29 @@ public class DatabaseManager : MonoBehaviour
         User newUser = new User(DistanceInGame, CoinsInGame, UserName, userID);
         string json = JsonUtility.ToJson(newUser);
 
-        dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
+        dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
     }
 
 
     // GET USER
     public IEnumerator GetUser(Action<string> onCallback)
     {
-        var userNameData = dbReference.Child("users").Child(userID).Child("UID_Google").GetValueAsync();
+        var IdDB = dbReference.Child("Users").Child(userID).Child("IdMobil").GetValueAsync();
 
-        yield return new WaitUntil(predicate: () => userNameData.IsCompleted);
+        yield return new WaitUntil(predicate: () => IdDB.IsCompleted);
 
-        if (userNameData != null)
+        if (IdDB != null)
         {
-            DataSnapshot snapshot = userNameData.Result;
+            DataSnapshot snapshot = IdDB.Result;
 
             onCallback.Invoke(snapshot.Value.ToString());
         }
     }
 
-
     // GET PUNTUACIO
     public IEnumerator GetDistance(Action<int> onCallback)
     {
-        var userDistanceData = dbReference.Child("users").Child(userID).Child("distancia").GetValueAsync();
+        var userDistanceData = dbReference.Child("Users").Child(userID).Child("Distancia").GetValueAsync();
 
         yield return new WaitUntil(predicate: () => userDistanceData.IsCompleted);
 
@@ -102,11 +103,10 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-
     // GET GOLD
     public IEnumerator GetGold(Action<int> onCallback)
     {
-        var userCoinData = dbReference.Child("users").Child(userID).Child("coins").GetValueAsync();
+        var userCoinData = dbReference.Child("Users").Child(userID).Child("Coins").GetValueAsync();
 
         yield return new WaitUntil(predicate: () => userCoinData.IsCompleted);
 
@@ -129,7 +129,7 @@ public class DatabaseManager : MonoBehaviour
         {
             CoinsDataBase = gold + CoinsInGame; // els diners de DB + els diners recollits en la partida
 
-            dbReference.Child("users").Child(userID).Child("coins").SetValueAsync(CoinsDataBase);
+            dbReference.Child("Users").Child(userID).Child("Coins").SetValueAsync(CoinsDataBase);
 
         }));
 
@@ -145,7 +145,7 @@ public class DatabaseManager : MonoBehaviour
             if (DistanceDataBase < DistanceInGame)
             {
                 //Update en BD si la puntuacio que hem fet es mes gran que el que tenim guardat
-                dbReference.Child("users").Child(userID).Child("distancia").SetValueAsync(DistanceInGame);
+                dbReference.Child("Users").Child(userID).Child("Distancia").SetValueAsync(DistanceInGame);
 
                 // Canvas HighScore
                 HightScore.text = "New HighScore: " + DistanceInGame.ToString() + "m";

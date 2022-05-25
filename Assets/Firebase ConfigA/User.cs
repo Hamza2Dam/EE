@@ -1,19 +1,19 @@
 
 public class User
 {
-    public int distancia;
-    public int coins;
-    public string Email;
-    public string UID_Google;
+    public int Distancia; //
+    public int Coins;
+    public string UserName;
+    public string IdMobil;
 
 
-    public User(int distancia, int coins, string Email, string UID_Google)
+    public User(int Distancia, int Coins, string UserName, string IdMobil)
     {
-        this.distancia = distancia;
-        this.coins = coins;
+        this.Distancia = Distancia;
+        this.Coins = Coins;
 
-        this.Email = Email;
-        this.UID_Google = UID_Google;
+        this.UserName = UserName;
+        this.IdMobil = IdMobil;
 
     }
 

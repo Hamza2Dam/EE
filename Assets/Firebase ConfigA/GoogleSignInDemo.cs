@@ -62,12 +62,6 @@ public class GoogleSignInDemo : MonoBehaviour
         GoogleSignIn.DefaultInstance.SignOut();
     }
 
-    public void OnDisconnect()
-    {
-        AddToInformation("Calling Disconnect");
-        GoogleSignIn.DefaultInstance.Disconnect();
-    }
-
     internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
     {
         if (task.IsFaulted)
@@ -130,27 +124,6 @@ public class GoogleSignInDemo : MonoBehaviour
                 AddToInformation("Sign In Successful.");
             }
         });
-    }
-
-    public void OnSignInSilently()
-    {
-        GoogleSignIn.Configuration = configuration;
-        GoogleSignIn.Configuration.UseGameSignIn = false;
-        GoogleSignIn.Configuration.RequestIdToken = true;
-        AddToInformation("Calling SignIn Silently");
-
-        GoogleSignIn.DefaultInstance.SignInSilently().ContinueWith(OnAuthenticationFinished);
-    }
-
-    public void OnGamesSignIn()
-    {
-        GoogleSignIn.Configuration = configuration;
-        GoogleSignIn.Configuration.UseGameSignIn = true;
-        GoogleSignIn.Configuration.RequestIdToken = false;
-
-        AddToInformation("Calling Games SignIn");
-
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
 }
