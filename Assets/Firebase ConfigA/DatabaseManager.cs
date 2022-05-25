@@ -29,22 +29,24 @@ public class DatabaseManager : MonoBehaviour
     public TimerScript timerScript;
 
     void Start()
-    {    
-        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
-
+    {
         userID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
 
-        dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
 
-        SearchIfUserExist();
+        dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
     }
 
     public void SearchIfUserExist()
-    {    
+    {
+
         StartCoroutine(GetUser((string IdDB) =>
         {
             String userIdDatabase = IdDB.ToString();
+            Debug.Log(userIdDatabase);
+
+            Debug.Log(IdDB);
 
             // si existeix el compte
             if (userID.Equals(userIdDatabase)) // 
@@ -63,7 +65,8 @@ public class DatabaseManager : MonoBehaviour
         }));
     }
 
-    // Crear Usuari nomes un cop i si userid no existeix || falta funcionalitat
+
+    // Crear Usuari nomes un cop i si userid no existeix 
     public void CreateUser()
     {
         User newUser = new User(DistanceInGame, CoinsInGame, UserName, userID);
