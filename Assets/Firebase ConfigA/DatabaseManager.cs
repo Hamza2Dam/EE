@@ -25,7 +25,7 @@ public class DatabaseManager : MonoBehaviour
     private string UserName = "Hamza";
 
     private DatabaseReference dbReference;
-
+    public Button buttonSave;
     public TimerScript timerScript;
 
     void Start()
@@ -36,6 +36,9 @@ public class DatabaseManager : MonoBehaviour
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
 
+        buttonSave.onClick.Invoke();
+
+        //SearchIfUserExist();
     }
 
     public void SearchIfUserExist()
@@ -43,9 +46,9 @@ public class DatabaseManager : MonoBehaviour
 
         StartCoroutine(GetUser((string IdDB) =>
         {
-            String userIdDatabase = IdDB.ToString();
-            Debug.Log(userIdDatabase);
+            String userIdDatabase = IdDB.ToString(); // igualar un string a id de bases de dades
 
+            Debug.Log(userIdDatabase);
             Debug.Log(IdDB);
 
             // si existeix el compte
@@ -64,6 +67,43 @@ public class DatabaseManager : MonoBehaviour
 
         }));
     }
+
+
+    //public void SearchIfUserExist2()
+    //{
+    //    String usID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
+
+    //    // Primer el que fem es una consulta
+    //    dbReference.Child("Users").Child(userID).GetValueAsync().ContinueWith(task =>
+    //    {
+    //        if (task.IsFaulted)
+    //        {
+    //            Debug.Log("Base de Datos esta Null: ");
+    //            buttonSave.onClick.Invoke();
+    //            CreateUser();
+    //        }
+
+    //        else if (task.IsCompleted)
+    //        {
+    //            DataSnapshot snapshot = task.Result;
+    //            string x;
+    //            x = snapshot.Child("IdMobil").Value.ToString();
+
+    //            Debug.Log("Compara ID si Existe el Usuario: " + x);
+
+    //            if (x != userID)
+    //            {
+    //                Debug.Log(" NOT Equal: " + x);
+    //                Debug.Log(" NOT Equal: " + usID);
+
+    //                buttonSave.onClick.Invoke();
+    //                CreateUser();
+    //            }
+
+    //        }
+    //    });
+    //}
+
 
 
     // Crear Usuari nomes un cop i si userid no existeix 

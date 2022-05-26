@@ -3276,7 +3276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -276.83, y: 61.62}
+  m_AnchoredPosition: {x: -815.4667, y: 61.62}
   m_SizeDelta: {x: 189.66, y: 123.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109584112
@@ -3325,7 +3325,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2114233655}
         m_TargetAssemblyTypeName: DatabaseManager, Assembly-CSharp
-        m_MethodName: SearchIfUserExist
+        m_MethodName: CreateUser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37332,6 +37332,7 @@ MonoBehaviour:
   Coins: {fileID: 1067684814}
   HightScore: {fileID: 1729529813}
   NameText: {fileID: 2133288375}
+  buttonSave: {fileID: 1109584112}
   timerScript: {fileID: 15025170}
 --- !u!4 &2114233656
 Transform:
