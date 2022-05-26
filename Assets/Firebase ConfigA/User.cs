@@ -14,7 +14,5 @@ public class User
         this.UserName = UserName; 
         this.IdMobil = IdMobil; 
 
-    }
-
-    
+    }    
 }

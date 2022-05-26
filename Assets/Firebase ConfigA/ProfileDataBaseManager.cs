@@ -5,6 +5,8 @@ using Firebase;
 using Firebase.Database;
 using UnityEngine.UI;
 using System;
+using System.Linq;
+
 
 public class ProfileDataBaseManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class ProfileDataBaseManager : MonoBehaviour
     private string userID;
     private int DistanceInGame = 0;
     private int CoinsInGame = 0;
+    public Transform scoreboardContent;
+    public GameObject scoreElement;
 
     void Start()
     {
@@ -63,6 +67,19 @@ public class ProfileDataBaseManager : MonoBehaviour
         }));
     }
 
+    // Crear un nou usuari en bases de dades
+    public void CreateUser()
+    {
+        // tenim una classe user i li enviem els quatres apartats que volem guardar
+        User newUser = new User(DistanceInGame, CoinsInGame, UserName.text.ToString(), userID);
+
+        // guardem el user en format json 
+        string json = JsonUtility.ToJson(newUser);
+
+        // amb la referencia de bases de dades crear el User, amb l'UID i amb el setrawjson que son les dads que volem guardar
+        dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
+    }
+
 
     // GET USER
     public IEnumerator GetUserID(Action<string> onCallback)
@@ -79,21 +96,6 @@ public class ProfileDataBaseManager : MonoBehaviour
         }
     }
 
-
-    // Crear un nou usuari en bases de dades
-    public void CreateUser()
-    {
-        // tenim una classe user i li enviem els quatres apartats que volem guardar
-        User newUser = new User(DistanceInGame, CoinsInGame, UserName.text.ToString(), userID);
-
-        // guardem el user en format json 
-        string json = JsonUtility.ToJson(newUser);
-
-        // amb la referencia de bases de dades crear el User, amb l'UID i amb el setrawjson que son les dads que volem guardar
-        dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
-    }
-
-
     public void GetUserName()
     {
         // Amb GetUserName aconseguim el nom del usuari creat
@@ -105,8 +107,6 @@ public class ProfileDataBaseManager : MonoBehaviour
 
         }));
     }
-
-
 
     public void GetTotalCoins()
     {
@@ -121,6 +121,52 @@ public class ProfileDataBaseManager : MonoBehaviour
         }));
     }
 
+    public void ScoreBoardButton()
+    {
+        StartCoroutine(LoadScoreBoard());
+    }
+
+
+    private IEnumerator LoadScoreBoard()
+    {
+        var DBtask = dbReference.Child("Users").OrderByChild("Coins").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBtask.IsCompleted);
+
+        if (DBtask.Exception != null)
+        {
+            Debug.Log("Failed" + DBtask.Exception);
+        }
+        else
+        {
+            DataSnapshot snapshot = DBtask.Result;
+
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("UserName").Value.ToString();
+                int highscore = int.Parse(childSnapshot.Child("Distancia").Value.ToString());
+                int coins = int.Parse(childSnapshot.Child("Coins").Value.ToString());
+
+
+                Debug.Log(" " + username + "/" + highscore + "/" + coins);
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, highscore, coins);
+            }
+
+            //Go to scoareboard screen
+
+        }
+
+
+
+    }
 
     // GET Total GOLD
     public IEnumerator GetTotalGold(Action<int> onCallback)
