@@ -8,22 +8,19 @@ public class SettingsController : MonoBehaviour
 {
 
     public GameObject LoginCanvas;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public GameObject SettingCanvas;
+    public GameObject LeaderBoardCanvas;
 
     public void Back()
     {
         SceneManager.LoadScene("MenuPrincipal");
+    }
+
+
+    // Log In Board
+    public void OpenLoginWindow()
+    {
+        LoginCanvas.SetActive(true); // Activar el canvas de Login
     }
 
     public void CloseLoginWindow()
@@ -31,15 +28,28 @@ public class SettingsController : MonoBehaviour
         LoginCanvas.SetActive(false); // Desactivar el canvas de Login
     }
 
-    public void OpenLoginWindow()
+    // Settings Board
+    public void OpenSettingWindow()
     {
-        LoginCanvas.SetActive(true); // Activar el canvas de Login
+        SettingCanvas.SetActive(true); // Activar el canvas de Login
+    }
+    public void CloseSettingWindow()
+    {
+        SettingCanvas.SetActive(false); // Desactivar el canvas de Login
     }
 
-    //public void LogInButtonPressA()
-    //{
+    // Leader Board
+    public void OpenLeaderWindow()
+    {
+        LeaderBoardCanvas.SetActive(true); // Activar el canvas de Login
+    }
+
+    public void CloseLeaderWindow()
+    {
+        LeaderBoardCanvas.SetActive(false); // Desactivar el canvas de Login
+    }
 
 
-    //}
+
 
 }

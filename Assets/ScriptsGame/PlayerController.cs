@@ -177,8 +177,6 @@ public class PlayerController : MonoBehaviour
         {
 
             rb.transform.position = new Vector3(carril2.transform.position.x, carril2.transform.position.y, 0);
-
-
         }
 
 
@@ -258,7 +256,7 @@ public class PlayerController : MonoBehaviour
 
     public void GameOverFuntion() {
 
-        dbscript.UpdateAllData(); // database update data(Coins) and (HighScore)
+        dbscript.UpdateAllData(); // Acutalitzar les dadese de bases de dades, seia la puntuació(HighScore) i els diners(Coins) , aquesta funcion es cridat d'un altre script
 
         
         gm.gameoversound.Play(); // GameOver soundEffect
@@ -279,8 +277,7 @@ public class PlayerController : MonoBehaviour
 
     
         Destroy(gm.SpawnCotxes); // Parar Cotxes
-        Destroy(gm.SpawnMonedes);
-    
+        Destroy(gm.SpawnMonedes);    
 
     }
 

@@ -5,159 +5,68 @@ using Firebase;
 using Firebase.Database;
 using UnityEngine.UI;
 using System;
-using Google;
-using Firebase.Auth;
 
 public class DatabaseManager : MonoBehaviour
 {
     public Text Distancia;
     public Text Coins;
     public Text HightScore;
-    public Text NameText;
 
-    int CoinsDataBase = 0;
+    int CoinsDataBase = 0; 
     int CoinsInGame = 0;
 
     int DistanceDataBase = 0;
     int DistanceInGame = 0;
 
     private string userID;
-    private string UserName = "Hamza";
+    //private string UserName = "Hamza";
 
     private DatabaseReference dbReference;
-    public Button buttonSave;
-    public TimerScript timerScript;
+    public TimerScript timerScript; // script de Timer
 
     void Start()
     {
-        userID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
+        userID = SystemInfo.deviceUniqueIdentifier; // Identificador Únic del Dispositiu
 
-        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com");
+        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com"); // el nostre base de dades
 
-        dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        dbReference = FirebaseDatabase.DefaultInstance.RootReference; // fem referencia el nostre bases de dades
 
-        buttonSave.onClick.Invoke();
-
-        //SearchIfUserExist();
-    }
-
-    public void SearchIfUserExist()
-    {
-
-        StartCoroutine(GetUser((string IdDB) =>
-        {
-            String userIdDatabase = IdDB.ToString(); // igualar un string a id de bases de dades
-
-            Debug.Log(userIdDatabase);
-            Debug.Log(IdDB);
-
-            // si existeix el compte
-            if (userID.Equals(userIdDatabase)) // 
-            {
-                NameText.text = "User Exist " + userIdDatabase;
-
-            }
-
-            // si no existeix, crear usuari nou amb BD
-            else
-            {
-                NameText.text = "User No Exist " + userIdDatabase;
-                CreateUser();
-            }
-
-        }));
-    }
-
-
-    //public void SearchIfUserExist2()
-    //{
-    //    String usID = SystemInfo.deviceUniqueIdentifier; // Unique Device ID
-
-    //    // Primer el que fem es una consulta
-    //    dbReference.Child("Users").Child(userID).GetValueAsync().ContinueWith(task =>
-    //    {
-    //        if (task.IsFaulted)
-    //        {
-    //            Debug.Log("Base de Datos esta Null: ");
-    //            buttonSave.onClick.Invoke();
-    //            CreateUser();
-    //        }
-
-    //        else if (task.IsCompleted)
-    //        {
-    //            DataSnapshot snapshot = task.Result;
-    //            string x;
-    //            x = snapshot.Child("IdMobil").Value.ToString();
-
-    //            Debug.Log("Compara ID si Existe el Usuario: " + x);
-
-    //            if (x != userID)
-    //            {
-    //                Debug.Log(" NOT Equal: " + x);
-    //                Debug.Log(" NOT Equal: " + usID);
-
-    //                buttonSave.onClick.Invoke();
-    //                CreateUser();
-    //            }
-
-    //        }
-    //    });
-    //}
-
-
-
-    // Crear Usuari nomes un cop i si userid no existeix 
-    public void CreateUser()
-    {
-        User newUser = new User(DistanceInGame, CoinsInGame, UserName, userID);
-        string json = JsonUtility.ToJson(newUser);
-
-        dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
-    }
-
-
-    // GET USER
-    public IEnumerator GetUser(Action<string> onCallback)
-    {
-        var IdDB = dbReference.Child("Users").Child(userID).Child("IdMobil").GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => IdDB.IsCompleted);
-
-        if (IdDB != null)
-        {
-            DataSnapshot snapshot = IdDB.Result;
-
-            onCallback.Invoke(snapshot.Value.ToString());
-        }
     }
 
     // GET PUNTUACIO
     public IEnumerator GetDistance(Action<int> onCallback)
     {
+        // fem una variable de tipus implícita = referncia de base de dades, els usuaris que existeixen, el usuari amb la id (Identificador Únic del Dispositiu), agafem las seves monedes
         var userDistanceData = dbReference.Child("Users").Child(userID).Child("Distancia").GetValueAsync();
 
+        // esperar fins que es completar las tasca 
         yield return new WaitUntil(predicate: () => userDistanceData.IsCompleted);
 
+        // si la variable no es null
         if (userDistanceData != null)
         {
-            DataSnapshot snapshot = userDistanceData.Result;
+            DataSnapshot snapshot = userDistanceData.Result; // fem un DataSnapshot 
 
-            onCallback.Invoke(int.Parse(snapshot.Value.ToString()));
+            onCallback.Invoke(int.Parse(snapshot.Value.ToString())); // returnem el valor que busquem
         }
     }
 
     // GET GOLD
     public IEnumerator GetGold(Action<int> onCallback)
     {
+        // fem una variable de tipus implícita = referncia de base de dades, els usuaris que existeixen, el usuari amb la id (Identificador Únic del Dispositiu), agafem las seves monedes
         var userCoinData = dbReference.Child("Users").Child(userID).Child("Coins").GetValueAsync();
 
+        // si ha completat las tasca 
         yield return new WaitUntil(predicate: () => userCoinData.IsCompleted);
 
+        // si la variable no es null
         if (userCoinData != null)
         {
-            DataSnapshot snapshot = userCoinData.Result;
+            DataSnapshot snapshot = userCoinData.Result; // fem un DataSnapshot 
 
-            onCallback.Invoke(int.Parse(snapshot.Value.ToString()));
+            onCallback.Invoke(int.Parse(snapshot.Value.ToString())); // returnem el valor que busquem
         }
     }
 
@@ -172,7 +81,7 @@ public class DatabaseManager : MonoBehaviour
         {
             CoinsDataBase = gold + CoinsInGame; // els diners de DB + els diners recollits en la partida
 
-            dbReference.Child("Users").Child(userID).Child("Coins").SetValueAsync(CoinsDataBase);
+            dbReference.Child("Users").Child(userID).Child("Coins").SetValueAsync(CoinsDataBase); // Fem un update que seria SetValue
 
         }));
 
@@ -185,19 +94,20 @@ public class DatabaseManager : MonoBehaviour
             DistanceInGame = timerScript.dbTimeCompare;
 
 
-            if (DistanceDataBase < DistanceInGame)
+            if (DistanceDataBase < DistanceInGame) // si la distancia que tenim guardat en base de es mes petit que el que hem fet actual
             {
                 //Update en BD si la puntuacio que hem fet es mes gran que el que tenim guardat
                 dbReference.Child("Users").Child(userID).Child("Distancia").SetValueAsync(DistanceInGame);
 
-                // Canvas HighScore
+                // Mostrem HighScore -> Canvas HighScore
                 HightScore.text = "New HighScore: " + DistanceInGame.ToString() + "m";
 
             }
 
-            else
+            else 
             {
-                // Canvas HighScore
+                // Si la Puntuacio es que tenim guardat en Base de dades es mes gran que actual
+                // Mostrem la puntuacio maxima -> Canvas HighScore
                 HightScore.text = "HighScore: " + DistanceDataBase.ToString() + "m";
             }
 
