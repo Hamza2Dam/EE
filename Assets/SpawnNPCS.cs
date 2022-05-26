@@ -20,7 +20,7 @@ public class SpawnNPCS : MonoBehaviour
     void Awake()
     {
 
-        InvokeRepeating("SpawnNext", 1f, 5f); // Cada x temps (xf) cridarem a la funció SpawnNext per spawnejar un nou objecte
+        InvokeRepeating("SpawnNext", 1f, 7f); // Cada x temps (xf) cridarem a la funció SpawnNext per spawnejar un nou objecte
 
 
     }
@@ -33,7 +33,7 @@ public class SpawnNPCS : MonoBehaviour
 
     void SpawnNext()
     {
-        int rand = Random.Range(0, 2); // Número random per escollir els carrils on spawnejar l'objecte de manera random
+        int rand = Random.Range(0, 3); // Número random per escollir els carrils on spawnejar l'objecte de manera random
         GameObject generate = Instantiate(npc[rand]); // Objecte a spawnejar (Instanciar)
 
 
@@ -47,15 +47,5 @@ public class SpawnNPCS : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D other) // Colisió Trigger 
-    {
-
-        if (other.gameObject.CompareTag("car")) // Si l'objecte amb el qual colisionem te un tag == "";
-        {
-            Debug.Log("choca");
-            Destroy(gameObject);
-            
-
-        }
-    }
+    
 }
