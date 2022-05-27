@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1879445940651037388}
   - component: {fileID: 1879445940651037391}
   - component: {fileID: 1879445940651037390}
-  - component: {fileID: 3865159378858355660}
+  - component: {fileID: 6085442071228658781}
   m_Layer: 0
   m_Name: ScoreElement
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &3865159378858355660
+--- !u!114 &6085442071228658781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 1879445941406722337}
   - component: {fileID: 1879445941406722336}
   m_Layer: 0
-  m_Name: Coins
+  m_Name: Kills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1879445942200089367}
   - component: {fileID: 1879445942200089366}
   m_Layer: 0
-  m_Name: Distance
+  m_Name: Deaths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

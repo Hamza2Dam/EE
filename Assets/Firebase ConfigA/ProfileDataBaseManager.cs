@@ -15,7 +15,8 @@ public class ProfileDataBaseManager : MonoBehaviour
 
     public InputField UserName;
 
-    private DatabaseReference dbReference;
+    private DatabaseReference dbReference; 
+    public GameObject LeaderBoardCanvas;
 
     private string userID;
     private int DistanceInGame = 0;
@@ -129,7 +130,7 @@ public class ProfileDataBaseManager : MonoBehaviour
 
     private IEnumerator LoadScoreBoard()
     {
-        var DBtask = dbReference.Child("Users").OrderByChild("Coins").GetValueAsync();
+        var DBtask = dbReference.Child("Users").OrderByChild("Distancia").GetValueAsync();
 
         yield return new WaitUntil(predicate: () => DBtask.IsCompleted);
 
@@ -147,20 +148,31 @@ public class ProfileDataBaseManager : MonoBehaviour
             }
 
             //Loop through every users UID
+            List<object> list = new List<object>();
+
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
                 string username = childSnapshot.Child("UserName").Value.ToString();
                 int highscore = int.Parse(childSnapshot.Child("Distancia").Value.ToString());
                 int coins = int.Parse(childSnapshot.Child("Coins").Value.ToString());
 
-
+                //list.Add(username);
                 Debug.Log(" " + username + "/" + highscore + "/" + coins);
+
+                //foreach (var author in list)
+                //{
+                //    Debug.Log(author);
+
+                //}
+
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
                 scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, highscore, coins);
             }
 
             //Go to scoareboard screen
+            LeaderBoardCanvas.SetActive(true); // Activar el canvas de Login
+
 
         }
 
