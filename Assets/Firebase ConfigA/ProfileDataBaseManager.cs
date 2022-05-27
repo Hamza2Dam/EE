@@ -6,23 +6,26 @@ using Firebase.Database;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 public class ProfileDataBaseManager : MonoBehaviour
 {
+    private string userID;
+    private int DistanceInGame = 0;
+    private int CoinsInGame = 0;
+
     public Text TotalCoins;
-    public Text UserNam;
+    public Text Usertxt;
 
     public InputField UserName;
 
     private DatabaseReference dbReference; 
-    public GameObject LeaderBoardCanvas;
 
-    private string userID;
-    private int DistanceInGame = 0;
-    private int CoinsInGame = 0;
-    public Transform scoreboardContent;
+    public GameObject LeaderBoardCanvas;
     public GameObject scoreElement;
+
+    public Transform scoreboardContent;
 
     void Start()
     {
@@ -71,6 +74,7 @@ public class ProfileDataBaseManager : MonoBehaviour
     // Crear un nou usuari en bases de dades
     public void CreateUser()
     {
+
         // tenim una classe user i li enviem els quatres apartats que volem guardar
         User newUser = new User(DistanceInGame, CoinsInGame, UserName.text.ToString(), userID);
 
@@ -79,6 +83,8 @@ public class ProfileDataBaseManager : MonoBehaviour
 
         // amb la referencia de bases de dades crear el User, amb l'UID i amb el setrawjson que son les dads que volem guardar
         dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
+        SceneManager.LoadScene("MenuPrincipal");
+        
     }
 
 
@@ -104,7 +110,7 @@ public class ProfileDataBaseManager : MonoBehaviour
         {
             string name = nam; // varaible name
 
-            UserNam.text = "UserName:" + name; // Mostar el nom del user
+            Usertxt.text = "UserName:" + name; // Mostar el nom del user
 
         }));
     }
@@ -122,62 +128,52 @@ public class ProfileDataBaseManager : MonoBehaviour
         }));
     }
 
-    public void ScoreBoardButton()
+    public void ScoreBoardButton() // el boto de ScoreBoard
     {
-        StartCoroutine(LoadScoreBoard());
+        StartCoroutine(LoadScoreBoard()); // Cridem la funció LoadScoreBoard
     }
 
 
+    // Cargar Dades en Score Board (Ranking by HighScore)
     private IEnumerator LoadScoreBoard()
     {
-        var DBtask = dbReference.Child("Users").OrderByChild("Distancia").GetValueAsync();
+        var DBtask = dbReference.Child("Users").OrderByChild("Distancia").GetValueAsync(); // Agafem tots els usuaris i ordenem per la distancia major a menor i fem un getValue
+         
+        yield return new WaitUntil(predicate: () => DBtask.IsCompleted); // esperem fins que acabi la tasca 
 
-        yield return new WaitUntil(predicate: () => DBtask.IsCompleted);
-
-        if (DBtask.Exception != null)
+        if (DBtask.Exception != null) // si la tasca ha donat error no fem res (per veure hem fet un debug que seria per unity)
         {
             Debug.Log("Failed" + DBtask.Exception);
         }
         else
         {
+            // Si la tasca ha estat completada donç guardem el resultat en Datasnapshot
             DataSnapshot snapshot = DBtask.Result;
 
-            foreach (Transform child in scoreboardContent.transform)
+            foreach (Transform child in scoreboardContent.transform) // Per cada Fila(Child) que surti en scoreboard
             {
-                Destroy(child.gameObject);
+                Destroy(child.gameObject); // Destruis/Netejar el ScoreBoard 
             }
 
-            //Loop through every users UID
-            List<object> list = new List<object>();
-
+            // Recorre cada UID d'usuari
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
-                string username = childSnapshot.Child("UserName").Value.ToString();
-                int highscore = int.Parse(childSnapshot.Child("Distancia").Value.ToString());
-                int coins = int.Parse(childSnapshot.Child("Coins").Value.ToString());
+                string username = childSnapshot.Child("UserName").Value.ToString(); // Nom usuari
+                int highscore = int.Parse(childSnapshot.Child("Distancia").Value.ToString()); // puntuació més alta
 
-                //list.Add(username);
-                Debug.Log(" " + username + "/" + highscore + "/" + coins);
 
-                //foreach (var author in list)
-                //{
-                //    Debug.Log(author);
-
-                //}
-
-                //Instantiate new scoreboard elements
+                // Instanciar nous elements del marcador
+                // scoreElement es un prefab que tenim creat
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, highscore, coins);
+
+                // Cridem la funcion NewScoreElement i enviem l'usuari i la puntuació
+                // amb l'ajuda del prefab que tenim ja creat posarem aquell prefab amb aquests textos
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, highscore);
             }
 
-            //Go to scoareboard screen
-            LeaderBoardCanvas.SetActive(true); // Activar el canvas de Login
-
+            LeaderBoardCanvas.SetActive(true); // Activar el canvas de Ranking
 
         }
-
-
-
     }
 
     // GET Total GOLD

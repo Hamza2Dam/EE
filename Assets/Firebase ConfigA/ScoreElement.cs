@@ -6,15 +6,13 @@ using UnityEngine.UI;
 
 public class ScoreElement : MonoBehaviour
 {
-    public TMP_Text usernameText;
-    public TMP_Text killsText;
-    public TMP_Text deathsText;
+    public TMP_Text UserNameText; 
+    public TMP_Text HighScoreText;
 
-    public void NewScoreElement (string _username, int _kills, int _deaths)
+    public void NewScoreElement (string _username, int _coins)
     {
-        usernameText.text = _username;
-        killsText.text = _kills.ToString();
-        deathsText.text = _deaths.ToString();
+        UserNameText.text = _username;
+        HighScoreText.text = _coins.ToString();
     }
 
 }

@@ -11,6 +11,14 @@ public class SettingsController : MonoBehaviour
     public GameObject SettingCanvas;
     public GameObject LeaderBoardCanvas;
 
+    private void Start()
+    {
+        LoginCanvas.SetActive(false); // Desactivar el canvas de Login
+        SettingCanvas.SetActive(false); // Desactivar el canvas de Setting
+        LeaderBoardCanvas.SetActive(false); // Desactivar el canvas de ScoreBoard/LeaderBoard
+
+    }
+
     public void Back()
     {
         SceneManager.LoadScene("MenuPrincipal");

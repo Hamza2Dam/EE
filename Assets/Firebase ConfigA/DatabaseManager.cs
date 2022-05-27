@@ -19,7 +19,6 @@ public class DatabaseManager : MonoBehaviour
     int DistanceInGame = 0;
 
     private string userID;
-    //private string UserName = "Hamza";
 
     private DatabaseReference dbReference;
     public TimerScript timerScript; // script de Timer
