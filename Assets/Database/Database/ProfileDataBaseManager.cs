@@ -74,7 +74,6 @@ public class ProfileDataBaseManager : MonoBehaviour
     // Crear un nou usuari en bases de dades
     public void CreateUser()
     {
-
         // tenim una classe user i li enviem els quatres apartats que volem guardar
         User newUser = new User(DistanceInGame, CoinsInGame, UserName.text.ToString(), userID);
 
@@ -88,21 +87,7 @@ public class ProfileDataBaseManager : MonoBehaviour
     }
 
 
-    // GET USER
-    public IEnumerator GetUserID(Action<string> onCallback)
-    {
-        var IdDB = dbReference.Child("Users").Child(userID).Child("IdMobil").GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => IdDB.IsCompleted);
-
-        if (IdDB != null)
-        {
-            DataSnapshot snapshot = IdDB.Result;
-
-            onCallback.Invoke(snapshot.Value.ToString());
-        }
-    }
-
+    //GET USER NAME
     public void GetUserName()
     {
         // Amb GetUserName aconseguim el nom del usuari creat
@@ -115,6 +100,7 @@ public class ProfileDataBaseManager : MonoBehaviour
         }));
     }
 
+    // Diners Total que te l'usuari
     public void GetTotalCoins()
     {
         // Fem get per aconseguir les monedes totals que tenim guarddes en bases de dades
@@ -128,6 +114,7 @@ public class ProfileDataBaseManager : MonoBehaviour
         }));
     }
 
+    // boto que crida aquesta funci, surt que no te referencia pero si que utilitzem aquesta funcio
     public void ScoreBoardButton() // el boto de ScoreBoard
     {
         StartCoroutine(LoadScoreBoard()); // Cridem la funció LoadScoreBoard
@@ -175,6 +162,23 @@ public class ProfileDataBaseManager : MonoBehaviour
 
         }
     }
+
+
+    // GET USER ID
+    public IEnumerator GetUserID(Action<string> onCallback)
+    {
+        var IdDB = dbReference.Child("Users").Child(userID).Child("IdMobil").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => IdDB.IsCompleted);
+
+        if (IdDB != null)
+        {
+            DataSnapshot snapshot = IdDB.Result;
+
+            onCallback.Invoke(snapshot.Value.ToString());
+        }
+    }
+
 
     // GET Total GOLD
     public IEnumerator GetTotalGold(Action<int> onCallback)
