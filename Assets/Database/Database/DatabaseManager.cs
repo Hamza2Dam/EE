@@ -20,7 +20,7 @@ public class DatabaseManager : MonoBehaviour
 
     private string userID;
 
-    private DatabaseReference dbReference;
+    private DatabaseReference dbReference; // referncia a bases de dades
     public TimerScript timerScript; // script de Timer
 
     void Start()
