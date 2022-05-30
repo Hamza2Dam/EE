@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private int contadorcoins;
     private bool stopGame;
 
-   
+    // button
+    public GameObject resumeButton;
+
 
     // Swap : 
     private float swipeRange = 50;
@@ -38,14 +40,10 @@ public class PlayerController : MonoBehaviour
     private bool stopTouch = false;
 
 
-
     public  Text coins;
     public Text finalcoins;
 
     public ScrollCarreteras speed;
-
-
-
 
 
 
@@ -54,14 +52,12 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>(); // Rigidbody
 
-
         rb.transform.position = new Vector3(carril2.transform.position.x, carril2.transform.position.y, 0);
         contadorcoins = 0; // Iniciem el comptador a 0
         stopGame = false;
         Time.timeScale = 1;
 
-        
-
+        resumeButton.SetActive(true);
 
     }
 
@@ -148,14 +144,7 @@ public class PlayerController : MonoBehaviour
 
             Right();
         }
-
-
-
     }
-
-
-
-
 
 
 
@@ -257,24 +246,25 @@ public class PlayerController : MonoBehaviour
     public void GameOverFuntion() {
 
         dbscript.UpdateAllData(); // Acutalitzar les dadese de bases de dades, seia la puntuació(HighScore) i els diners(Coins) , aquesta funcion es cridat d'un altre script
-
         
         gm.gameoversound.Play(); // GameOver soundEffect
 
-
         gm.GameOverObject.SetActive(true); // Activem el canvas de GameOver
 
-        finalcoins.text = contadorcoins.ToString() ;
+        resumeButton.SetActive(false);
+
+        finalcoins.text = contadorcoins.ToString(); // Mostrem puntuacio  
 
         StopGame();// Parar tot
-      
+
+
+
     }
 
     private void StopGame()
     {
         Time.timeScale = 0;
         stopGame = true;
-
     
         Destroy(gm.SpawnCotxes); // Parar Cotxes
         Destroy(gm.SpawnMonedes);    

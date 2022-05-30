@@ -2288,6 +2288,7 @@ MonoBehaviour:
   carril2: {fileID: 2040562976}
   carril3: {fileID: 1342392751}
   dbscript: {fileID: 2114233655}
+  resumeButton: {fileID: 1508227452}
   coins: {fileID: 1067684814}
   finalcoins: {fileID: 456244117}
   speed: {fileID: 1215122750}
@@ -37118,7 +37119,6 @@ MonoBehaviour:
   Distancia: {fileID: 1321662281}
   Coins: {fileID: 1067684814}
   HightScore: {fileID: 1729529813}
-  buttonSave: {fileID: 0}
   timerScript: {fileID: 15025170}
 --- !u!4 &2114233656
 Transform:
