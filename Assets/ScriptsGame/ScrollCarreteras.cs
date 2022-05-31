@@ -5,13 +5,15 @@ using UnityEngine;
 public class ScrollCarreteras : MonoBehaviour
 
 {
-
+    // Limit per canviar de mapa
     private int limitmapa = 23;
 
 
-
+    // Mapes 
     public GameObject map1;
     public GameObject map2;
+
+    // Velocitat
     public float scrollspeed;
 
     
@@ -19,6 +21,7 @@ public class ScrollCarreteras : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Velocitat del scroll
         scrollspeed = 3;
 
 
@@ -35,10 +38,6 @@ public class ScrollCarreteras : MonoBehaviour
 
     public void Scroll() 
     {
-
-         
-
-
 
         map1.transform.position += new Vector3(0, -scrollspeed * Time.deltaTime);
 

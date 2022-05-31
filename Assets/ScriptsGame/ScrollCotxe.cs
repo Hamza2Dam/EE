@@ -34,7 +34,7 @@ public class ScrollCotxe : MonoBehaviour
         if (other.gameObject.CompareTag("npc")) // Si l'objecte amb el qual colisionem te un tag == "";
         {
             Debug.Log("choca");
-            Destroy(other);
+            Destroy(other.gameObject);
 
 
         }
