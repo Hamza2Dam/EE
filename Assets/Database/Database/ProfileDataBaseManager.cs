@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-
+// Aquest script el que fa es crear un usuari nou, el scoreboard (Nom + HighScore), mostrar el nom del usauri en el perfil i els coins
 public class ProfileDataBaseManager : MonoBehaviour
 {
     private string userID;
@@ -33,15 +33,14 @@ public class ProfileDataBaseManager : MonoBehaviour
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference; // referecia a la nostra base de dades
 
-        //SearchIfUserExist();
+        //SearchIfUserExist();   // Comprovar si l'usari existeix o no (NO ens ha acabat de funcion aquesta funció)
 
         GetTotalCoins();
         GetUserName();
 
     }
 
-    // Comprovar si l'usari existeix o no (NO ens ha acabat de funcion aquesta funció)
-    // el que volem aconseguir es un usuari ja ha registart un cop i ja surt en bases de dades 
+    // El que volem aconseguir es, si un usuari ja ha registart un cop i ja surten les seves dades en  bases de dades 
     // doncs que no pugui crear un altre cop perquè si ho fa, és substitueixen les dades 
 
     // El que he fet es agafar les ID de bases de dades i compara si aquella ID de BD es la mateixa que 
@@ -60,11 +59,12 @@ public class ProfileDataBaseManager : MonoBehaviour
                 Debug.Log("User Exist " + userIdDatabase);
             }
 
-            // si no existeix, crear usuari nou amb BD
+            // si no existeix, crear usuari nou en BD
             else
             {
                 Debug.Log("User No Exist " + userIdDatabase);
-                CreateUser();
+                CreateUser();  // Crear un nou usuari en bases de dades
+
             }
         }));
     }

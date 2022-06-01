@@ -6,6 +6,7 @@ using Firebase.Database;
 using UnityEngine.UI;
 using System;
 
+// Aqueste script nos serveix per guardar i mostrar les puntuacion del usuari i els coins 
 public class DatabaseManager : MonoBehaviour
 {
     public Text Distancia;

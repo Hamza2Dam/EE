@@ -1,3 +1,6 @@
+
+// Aquesta classe en serveix per crear un usuari Nou.
+
 public class User
 {
     public int Distancia; // Puntuacio (Score)
