@@ -80,15 +80,12 @@ public class SpawnCoins : MonoBehaviour
     }
 
 
-    public void Groupofcoins(float carril, int coins)
+    public void Groupofcoins(float carril, int coins) // Li passem el carril i el numero de monedes
     {
 
        
         int y = 40; // La posicio y de la moneda
       
-
-     
-
         for (int x = 0; x < coins; x++) // Bucle per spawnejar monedes
         {
          

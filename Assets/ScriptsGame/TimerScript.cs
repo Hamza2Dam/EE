@@ -32,20 +32,7 @@ public class TimerScript : MonoBehaviour
     {
         tempsirecorregut();
 
-        //Debug.Log("Coche vermell" + velocitatobjectes[0].GetComponent<ScrollCotxe>().speed);
-        //Debug.Log("Coche blau " + velocitatobjectes[1].GetComponent<ScrollCotxe>().speed);
-        //Debug.Log(" Coins " + velocitatobjectes[2].GetComponent<ScrollCotxe>().speed);
-        //Debug.Log("Oil " + velocitatobjectes[3].GetComponent<ScrollCotxe>().speed);
-
-
-
-        
-
-
-
-
-
-
+     
     }
 
     public void tempsirecorregut()

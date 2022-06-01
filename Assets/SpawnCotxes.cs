@@ -99,12 +99,12 @@ public class SpawnCotxes : MonoBehaviour
 
             }
 
-            void spawn(float carrilx , float carrilx2)
+            void spawn(float carrilx , float carrilx2) // Li pasem els carrils
             {
-                generate.transform.position = new Vector3(carrilx, 39, 0);
+                generate.transform.position = new Vector3(carrilx, 39, 0); // Posicio a spawnejar
                 GameObject generate2 = Instantiate(car[randomcar2]); // Objecte a spawnejar (Instanciar)
 
-                generate2.transform.position = new Vector3(carrilx2, 39, 0);
+                generate2.transform.position = new Vector3(carrilx2, 39, 0);// Posicio2 a spawnejar
             }
 
 
