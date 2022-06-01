@@ -97,7 +97,7 @@ public class ProfileDataBaseManager : MonoBehaviour
         {
             string name = nam; // varaible name
 
-            Usertxt.text = "UserName:" + name; // Mostar el nom del user
+            Usertxt.text = name; // Mostar el nom del user
 
         }));
     }
@@ -111,7 +111,7 @@ public class ProfileDataBaseManager : MonoBehaviour
         {
             string coin = gold.ToString(); // igualar una variable amb els diners total que tenim guardat (es podria eviat aquesta linia de codi, pero per fer ho mes facil de entendre fem aixi)
 
-            TotalCoins.text = "Total:" + coin; // Mostar les monedes total que te un usuari
+            TotalCoins.text = coin; // Mostar les monedes total que te un usuari
 
         }));
     }
