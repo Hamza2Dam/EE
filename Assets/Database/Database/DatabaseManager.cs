@@ -20,16 +20,14 @@ public class DatabaseManager : MonoBehaviour
 
     private string userID;
 
-    private DatabaseReference dbReference; // referncia a bases de dades
+    private DatabaseReference dbReference; // referència a bases de dades
     public TimerScript timerScript; // script de Timer
 
     void Start()
     {
         userID = SystemInfo.deviceUniqueIdentifier; // Identificador Únic del Dispositiu
 
-        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com"); // el nostre base de dades
-
-        dbReference = FirebaseDatabase.DefaultInstance.RootReference; // fem referencia el nostre bases de dades
+        dbReference = FirebaseDatabase.DefaultInstance.RootReference; // Fem referència al nostre bases de dades, això podem fer gràcies a l'import de Firebase database.package
 
     }
 

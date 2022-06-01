@@ -29,9 +29,7 @@ public class ProfileDataBaseManager : MonoBehaviour
 
     void Start()
     {
-        userID = SystemInfo.deviceUniqueIdentifier; // Identificador Únic del Dispositiu
-
-        FirebaseDatabase database = FirebaseDatabase.GetInstance("https://final-project-406f7-default-rtdb.firebaseio.com"); // bases de dades
+        userID = SystemInfo.deviceUniqueIdentifier; // Identificador Únic del Dispositiu on userID es un string per guardar la UID
 
         dbReference = FirebaseDatabase.DefaultInstance.RootReference; // referecia a la nostra base de dades
 
@@ -74,14 +72,18 @@ public class ProfileDataBaseManager : MonoBehaviour
     // Crear un nou usuari en bases de dades
     public void CreateUser()
     {
-        // tenim una classe user i li enviem els quatres apartats que volem guardar
+        // Crear un objecte anomenat "newUser" i utilitzeu-lo per per guardar els quatres parametres que enviem
+        // tenim una classe User i li enviem els quatres apartats que volem guardar
         User newUser = new User(DistanceInGame, CoinsInGame, UserName.text.ToString(), userID);
 
         // guardem el user en format json 
         string json = JsonUtility.ToJson(newUser);
 
-        // amb la referencia de bases de dades crear el User, amb l'UID i amb el setrawjson que son les dads que volem guardar
+        // amb la referencia de bases de dades crear el User (per tenir tot els usuaris dins de user), amb l'UID (ho tenim en start) i
+        // amb el SetRawJsonValueAsync que son les dads que volem guardar en forma JSON
         dbReference.Child("Users").Child(userID).SetRawJsonValueAsync(json);
+
+        // Cargar l'escena principal
         SceneManager.LoadScene("MenuPrincipal");
         
     }
@@ -150,7 +152,7 @@ public class ProfileDataBaseManager : MonoBehaviour
 
 
                 // Instanciar nous elements del marcador
-                // scoreElement es un prefab que tenim creat
+                // scoreElement es un prefab que tenim creat que conte dos texto i es onpoes el nom i la puntuacio del jugador
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
 
                 // Cridem la funcion NewScoreElement i enviem l'usuari i la puntuació

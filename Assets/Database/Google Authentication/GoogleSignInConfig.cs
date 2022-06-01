@@ -9,12 +9,8 @@ using Google;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoogleSignInDemo : MonoBehaviour
+public class GoogleSignInConfig : MonoBehaviour
 {
-    // Hem estat seguint un tutorials per conectar el compte google.
-    // Ja que el firebase mateix ens proporciona unes funcions que hem de utilitzar, per aixo necessitem molts coneixements.
-    // Per anar bé hem estat mirant uns tutorial, en ha funcionat tot meny que es guardi la UID en bases de dades
-
     private string webClientId = "352196159774-d52l815eaqiqvan43po01fe6tj4h9tfu.apps.googleusercontent.com"; // Auth de Google del Firebase
 
     private string Name;
@@ -23,7 +19,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     public Text Emailtxt;
 
-    private GoogleSignInConfiguration configuration;
+    private GoogleSignInConfiguration configuration; // Script GoogleSignInConfiguration importat del Firebase Auth.Package
 
     private void Awake()
     {
@@ -39,7 +35,7 @@ public class GoogleSignInDemo : MonoBehaviour
     // Sign In
     private void OnSignIn()
     {
-        Emailtxt.text = "Sign In..."; // mostre sign in
+        Emailtxt.text = "Sign In..."; // mostrem sign in
 
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
@@ -53,7 +49,7 @@ public class GoogleSignInDemo : MonoBehaviour
     // Sign Out
     private void OnSignOut()
     {
-        Emailtxt.text = "Sign Out..."; // mostre sign out
+        Emailtxt.text = "Sign Out..."; // mostrem sign out
 
         AddToInformation("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
@@ -101,7 +97,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     // Amb aquesta funcio anem mustran en text totes les dades para saber si tot va bé // ho tenim desactivat,
     // como ja hem comentat ens mostra la info pero no deixar guarda en bases de dadse
-    // hem explcat mes detalladament en document
+    // hem explcat mes detalladament en document en apartat de Autenticació
     private void AddToInformation(string str)
     {
         //infoText.text += "\n" + str;
